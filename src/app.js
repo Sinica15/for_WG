@@ -1,8 +1,14 @@
 // this is an example of improting data from JSON
-import 'orders' from '../data/orders.json';
+//import 'orders' from '../data/orders.json';
+var orders = require('../data/orders.json');
+var users = require('../data/users.json');
+var companies = require('../data/companies.json');
+
+import './styles.css';
+import tableRender from "./tableRender.js";
 
 export default (function () {
-    // YOUR CODE GOES HERE
-    // next line is for example only
-    document.getElementById("app").innerHTML = "<h1>Hello WG Forge</h1>";
+    var app = document.getElementById("app");
+    console.log("1");
+    tableRender(app, orders, users, companies);
 }());

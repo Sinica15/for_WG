@@ -1,0 +1,9 @@
+
+#mainTable{
+    border-collapse: collapse;
+}
+
+#mainTable th{
+    border: #c1c1c1 solid 1px;
+    padding: 6px;
+}

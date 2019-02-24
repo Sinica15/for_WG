@@ -3,7 +3,12 @@
     border-collapse: collapse;
 }
 
-#mainTable th{
+#mainTable th, td{
     border: #c1c1c1 solid 1px;
     padding: 6px;
+    text-align: center;
+}
+
+.user-details{
+    display: none;
 }

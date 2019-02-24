@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+import eventsSetter from "./events.js";
+
 function getNecessaryDateFormat (date, format){
     return moment(date*1000).format(format);
 }
@@ -76,27 +78,31 @@ function getUserDetails(userObject, companies){
     return '<div class="user-details">' + userDetails + '</div>';
 }
 
-function getUserData(id, users, companies){
+function getUserData(order, users, companies, sortTempFlag){
+    var id = order['user_id'];
     var userObject;
     for (let i = 0; i < users.length; i++){
         if (id == users[i]['id']){
             userObject = users[i];
+            if (sortTempFlag){
+                order['name_for_sort'] = userObject['first_name'] + userObject['last_name']; 
+                order['location_for_sort'] = order['order_country'] + order['order_ip'];
+                sortTempFlag = false;
+            }
+//            console.log(order['name_for_sort']);
         }
     }
     return getUserName(userObject) + getUserDetails(userObject, companies);
 }
 
-export default function tableRender(nodeTo, orders, users, companies) {
+export default function tableRender(nodeTo, orders, users, companies, sortTempFlag) {
     
-    var outPutTable;
-    
-    outPutTable = "<table id='mainTable'><thead><tr><th>Transaction ID</th><th>User Info</th><th>Order Date</th><th>Order Amount</th><th>Card Number</th><th>Card Type</th><th>Location</th></tr></thead><tbody>";
-    
+    var outPutTable="";
         
     for(let i = 0; i <orders.length; i++){
         outPutTable+="<tr id='" + orders[i]['id'] + "'>";
         outPutTable+="<td>" + orders[i]['transaction_id'] + "</td>";
-        outPutTable+="<td class='user_data'>" + getUserData(orders[i]['user_id'], users, companies) + "</td>";
+        outPutTable+="<td class='user_data'>" + getUserData(orders[i], users, companies, sortTempFlag) + "</td>";
         outPutTable+="<td>" + getNecessaryDateFormat(orders[i]['created_at'], 'MM/DD/YYYY, HH:MM:SS LT') + "</td>";
         outPutTable+="<td>" + getNecessaryCurrency(orders[i]['total'], 1) + "</td>";
         outPutTable+="<td>" + hideCardNumber(orders[i]['card_number']) + "</td>";
@@ -106,7 +112,10 @@ export default function tableRender(nodeTo, orders, users, companies) {
         outPutTable+="</tr>";
     }
     
-    outPutTable +="</tbody></table>";
+    
     nodeTo.innerHTML = outPutTable;
     
-};
+    eventsSetter(orders, users, companies);
+    
+    
+}

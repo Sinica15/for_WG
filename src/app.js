@@ -5,46 +5,51 @@ var users = require('../data/users.json');
 var companies = require('../data/companies.json');
 
 import './styles.css';
-import tableRender from "./tableRender.js";
+import tableBodyRender from "./tableBodyRender.js";
+import tableSort from "./tableSort.js";
 
 export default (function () {
     var app = document.getElementById("app");
     
     console.log("1");
     
-    tableRender(app, orders, users, companies);
+    var headerTable = "";
+    headerTable = "<table id='mainTable'><thead><tr>";
+    headerTable += "<th class = 'sortable'>Transaction ID</th>";
+    headerTable += "<th class = 'sortable'>User Info</th>";
+    headerTable += "<th class = 'sortable'>Order Date</th>";
+    headerTable += "<th class = 'sortable'>Order Amount</th>";
+    headerTable += "<th>Card Number</th>";
+    headerTable += "<th class = 'sortable'>Card Type</th>";
+    headerTable += "<th class = 'sortable'>Location</th>";
+    headerTable += "</tr></thead><tbody id='table-body'>";
+    headerTable +="</tbody></table>";
     
-    $(".user_data > a").click(function(event) {
-//        console.log(332);
-        event.preventDefault(); 
-        
-    });
+    app.innerHTML = headerTable;
+    var tableBody = document.getElementById('table-body');
+    var sortTempFlag = true;
+    tableBodyRender(tableBody, orders, users, companies, sortTempFlag);
     
-//    $('#block').one('click', fn);
-
-    
-//    $(".user_data > a").one('click', function(){
-//        console.log(228);
-//        $(".user-details").siblings().css('display', 'block');
-//    });
-    
-    
-    $("td.user_data > a").click(function(){
-        if($(this).siblings().css('display') == 'block'){
-            $(this).siblings().css('display', 'none');
+    $("th.sortable").click(function(event) {
+        let column = $(this).text(); 
+        let reverse = false;
+        if ($(this).hasClass("sorted")){
+            reverse = true;
+            $(this).removeClass("sorted");
         }else{
-            $(this).siblings().css('display', 'block');
+            $(this).addClass("sorted");
         }
+//        console.log(column);
+        
+        tableSort(orders, column, reverse);
+        tableBodyRender(tableBody, orders, users, companies);
     });
     
     
     
+//    tableSort(orders, 'User Info', true);
+//    tableRender(app, orders, users, companies);
     
-
+   
     
-    
-
-
-
-
 }());

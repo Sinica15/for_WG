@@ -12,3 +12,7 @@
 .user-details{
     display: none;
 }
+
+.sortable{
+    cursor: pointer;
+}

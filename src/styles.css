@@ -16,3 +16,7 @@
 .sortable{
     cursor: pointer;
 }
+
+#table-body tr:not(#statistics):hover{
+    background-color: rgba(246, 246, 246, 1);
+}

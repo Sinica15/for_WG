@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-import eventsSetter from "./events.js";
+import eventsSetter from "./eventsTableBody.js";
 
 function getNecessaryDateFormat (date, format){
     return moment(date*1000).format(format);

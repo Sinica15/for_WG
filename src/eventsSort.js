@@ -2,10 +2,12 @@ const $ = require("jquery");
 
 import tableBodyRender from "./tableBodyRender.js";
 import tableSort from "./tableSort.js";
+import searchWithoutEvent from "./search.js";
 
 export default function eventSetSort(tableBody, orders, users, companies) {
    
     $("th.sortable").click(function(event) {
+//        $("th.sortable").removeClass("sorted");
         $("#arrow").remove()
         let column = $(this).text(); 
         let reverse = false;
@@ -19,10 +21,15 @@ export default function eventSetSort(tableBody, orders, users, companies) {
 //        console.log(column);
         tableSort(orders, column, reverse);
         tableBodyRender(tableBody, orders, users, companies);
+        console.log("123");
+        searchWithoutEvent(orders, users);
+        console.log("321");
+        
+        
         if (!reverse){
-            $('<span id="arrow">&#8595;</span>').appendTo(this);
+            $('<span id="arrow"> &#8595;</span>').appendTo(this);
         }else{
-            $('<span id="arrow">&#8593;</span>').appendTo(this);
+            $('<span id="arrow"> &#8593;</span>').appendTo(this);
         }
     });
     

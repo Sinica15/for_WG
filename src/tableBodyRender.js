@@ -95,6 +95,27 @@ function getUserData(order, users, companies, sortTempFlag){
     return getUserName(userObject) + getUserDetails(userObject, companies);
 }
 
+function addStatsCells(){
+    var out = "";
+    out += "<tr class='statistics'>";
+    out += "<td>Orders Count</td>";
+    out += "<td>Orders Total</td>";
+    out += "<td>Median Value</td>";
+    out += "<td colspan='2'>Average Check</td>";
+    out += "<td>Average Check (Female)</td>";
+    out += "<td>Average Check (Male)</td></tr>";
+    out += "<tr class='statistics'>";
+    out += "<td id='orders-count'></td>";
+    out += "<td id='orders-total'></td>";
+    out += "<td id='median-value'></td>";
+    out += "<td id='average-check' colspan='2'></td>";
+    out += "<td id='average-check-female'></td>";
+    out += "<td id='average-check-male'></td>";
+    out += "</tr>";
+    return out;
+    
+}
+
 export default function tableRender(nodeTo, orders, users, companies, sortTempFlag) {
     
     var outPutTable="";
@@ -113,6 +134,7 @@ export default function tableRender(nodeTo, orders, users, companies, sortTempFl
     }
     
     
+    outPutTable += addStatsCells();
     nodeTo.innerHTML = outPutTable;
     
     eventsSetter(orders, users, companies);

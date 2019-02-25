@@ -8,9 +8,11 @@ import './styles.css';
 
 import tableBodyRender from "./tableBodyRender.js";
 import tableSort from "./tableSort.js";
-import searchAndStat from "./search.js";
+import search from "./search.js";
 import tableHeaderRender from "./tableHeaderRender.js";
 import eventSetSort from "./eventsSort.js";
+import stats from "./stats.js";
+
 
 export default (function () {
     
@@ -22,7 +24,7 @@ export default (function () {
     
     eventSetSort(tableBody, orders, users, companies);
     
-    searchAndStat(orders, users);
+    search(orders, users);
     
     
 //    tableSort(orders, 'User Info', true);

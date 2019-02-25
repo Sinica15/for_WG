@@ -15,7 +15,7 @@ function checkForNothingFound(){
 //    console.log($("#table-body tr"));
     var notFound = true;
     
-    $("#table-body tr:not(#statistics)").each(function(i, tr){
+    $("#table-body tr:not(.statistics)").each(function(i, tr){
         if ($(tr).css('display') == 'table-row'){
             notFound = false;
             return false;
@@ -71,8 +71,14 @@ function searchInTable(searchableValue, orders, users){
     }
     
 }
+export function searchWithoutEvent(orders, users){
+    let searchVal = $("#search").value;
+    console.log(searchVal);
+    searchInTable(searchVal, orders, users);
+    checkForNothingFound();
+}
                              
-export default function searchAndStat(orders, users) {
+export default function search(orders, users) {
     $("#search").on('input', function(){
 //        console.log(this.value);
         searchInTable(this.value, orders, users);

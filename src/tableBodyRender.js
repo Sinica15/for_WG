@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 import eventsSetter from "./eventsTableBody.js";
+import stats from "./stats.js"
 
 function getNecessaryDateFormat (date, format){
     return moment(date*1000).format(format);
@@ -8,7 +9,7 @@ function getNecessaryDateFormat (date, format){
 
 function getNecessaryCurrency(value ,course){
     var currencySymbol = "$";
-    return currencySymbol + " " + value*course;
+    return value*course + " " + currencySymbol;
 }
 
 function hideCardNumber(number){
@@ -99,16 +100,16 @@ function addStatsCells(){
     var out = "";
     out += "<tr class='statistics'>";
     out += "<td>Orders Count</td>";
+    out += "<td colspan='2'>Average Check</td>";
     out += "<td>Orders Total</td>";
     out += "<td>Median Value</td>";
-    out += "<td colspan='2'>Average Check</td>";
     out += "<td>Average Check (Female)</td>";
     out += "<td>Average Check (Male)</td></tr>";
     out += "<tr class='statistics'>";
     out += "<td id='orders-count'></td>";
+    out += "<td id='average-check' colspan='2'></td>";
     out += "<td id='orders-total'></td>";
     out += "<td id='median-value'></td>";
-    out += "<td id='average-check' colspan='2'></td>";
     out += "<td id='average-check-female'></td>";
     out += "<td id='average-check-male'></td>";
     out += "</tr>";
@@ -119,17 +120,22 @@ function addStatsCells(){
 export default function tableRender(nodeTo, orders, users, companies, sortTempFlag) {
     
     var outPutTable="";
+    
+    var testFlag = false;
         
     for(let i = 0; i <orders.length; i++){
+        if (testFlag && i == 6){
+            break;
+        }
+        
         outPutTable+="<tr id='" + orders[i]['id'] + "'>";
         outPutTable+="<td>" + orders[i]['transaction_id'] + "</td>";
         outPutTable+="<td class='user_data'>" + getUserData(orders[i], users, companies, sortTempFlag) + "</td>";
         outPutTable+="<td>" + getNecessaryDateFormat(orders[i]['created_at'], 'MM/DD/YYYY, HH:MM:SS LT') + "</td>";
-        outPutTable+="<td>" + getNecessaryCurrency(orders[i]['total'], 1) + "</td>";
+        outPutTable+="<td class = 'total'>" + getNecessaryCurrency(orders[i]['total'], 1) + "</td>";
         outPutTable+="<td>" + hideCardNumber(orders[i]['card_number']) + "</td>";
         outPutTable+="<td>" + orders[i]['card_type'] + "</td>";
         outPutTable+="<td>" + orders[i]['order_country'] + " " + "(" + orders[i]['order_ip'] + ")" + "</td>";
-        
         outPutTable+="</tr>";
     }
     
@@ -137,7 +143,8 @@ export default function tableRender(nodeTo, orders, users, companies, sortTempFl
     outPutTable += addStatsCells();
     nodeTo.innerHTML = outPutTable;
     
-    eventsSetter(orders, users, companies);
+    stats();
     
+    eventsSetter(orders, users, companies);
     
 }

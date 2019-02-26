@@ -3,8 +3,8 @@ export default function tableHeaderRender() {
     var app = document.getElementById("app");    
     var headerTable = "";
     headerTable += "<table id='mainTable'><thead><tr>";
-    headerTable += "<th>Search:</th>";
-    headerTable += "<th colspan='7'><input type='text' id='search'></th>";
+    headerTable += "<th colspan='2'>Search:</th>";
+    headerTable += "<th colspan='6'><input type='text' id='search'></th>";
 //    headerTable += "<th>UsId<input type='checkbox' id='us-id'></th>";
     headerTable += "</tr><tr>";
     headerTable += "<th class = 'sortable'>Transaction ID</th>";

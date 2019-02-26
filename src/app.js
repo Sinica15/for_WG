@@ -1,4 +1,4 @@
-var $ = require("jquery");
+const $ = require("jquery");
 
 var orders = require('../data/orders.json');
 var users = require('../data/users.json');
@@ -8,9 +8,9 @@ import './styles.css';
 
 import tableBodyRender from "./tableBodyRender.js";
 import tableSort from "./tableSort.js";
-import search from "./search.js";
 import tableHeaderRender from "./tableHeaderRender.js";
 import eventSetSort from "./eventsSort.js";
+import * as search from "./search";
 import stats from "./stats.js";
 
 
@@ -24,8 +24,9 @@ export default (function () {
     
     eventSetSort(tableBody, orders, users, companies);
     
-    search(orders, users);
+    search.searchWithEvent(orders, users);
     
+    stats();
     
 //    tableSort(orders, 'User Info', true);
 //    tableRender(app, orders, users, companies);

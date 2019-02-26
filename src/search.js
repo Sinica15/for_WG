@@ -10,22 +10,6 @@ function getJustUserName (id, users){
     }
 }
 
-function checkForNothingFound(){
-    $('#nothing-found').remove();
-//    console.log($("#table-body tr"));
-    var notFound = true;
-    
-    $("#table-body tr:not(.statistics)").each(function(i, tr){
-        if ($(tr).css('display') == 'table-row'){
-            notFound = false;
-            return false;
-        }
-    });
-    if (notFound){
-        $("#table-body").append("<tr id='nothing-found'><td colspan='7' > Nothing found </td></tr>");
-    }
-}
-
 function searchInTable(searchableValue, orders, users){
     
     
@@ -41,7 +25,8 @@ function searchInTable(searchableValue, orders, users){
             
             if (key == "card_number" || 
                 key == "created_at" || 
-                key == "location_for_sort" || 
+                key == "location_for_sort" ||
+                key == "id" || 
                 key == "name_for_sort") continue;
             
 //            console.log(key.toString());
@@ -71,16 +56,34 @@ function searchInTable(searchableValue, orders, users){
     }
     
 }
+
+function checkForNothingFound(){
+    $('#nothing-found').remove();
+//    console.log($("#table-body tr"));
+    var notFound = true;
+    
+    $("#table-body tr:not(.statistics)").each(function(i, tr){
+        if ($(tr).css('display') == 'table-row'){
+            notFound = false;
+            return false;
+        }
+    });
+    if (notFound){
+        $("#table-body").append("<tr id='nothing-found'><td colspan='7' > Nothing found </td></tr>");
+    }
+}
+
 export function searchWithoutEvent(orders, users){
-    let searchVal = $("#search").value;
+    let searchVal = $("#search").val();
     console.log(searchVal);
     searchInTable(searchVal, orders, users);
     checkForNothingFound();
 }
                              
-export default function search(orders, users) {
+export function searchWithEvent(orders, users) {
     $("#search").on('input', function(){
-//        console.log(this.value);
+//        console.log(this.value);   
+//        console.log(this.value);   
         searchInTable(this.value, orders, users);
         checkForNothingFound();
         

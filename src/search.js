@@ -1,4 +1,4 @@
-const $ = require("jquery");
+import $ from "jquery";
 
 function getJustUserName (id, users){
     for (let i = 0; i < users.length; i++){
@@ -60,7 +60,7 @@ function searchInTable(searchableValue, orders, users){
 function checkForNothingFound(){
     $('#nothing-found').remove();
 //    console.log($("#table-body tr"));
-    var notFound = true;
+    let notFound = true;
     
     $("#table-body tr:not(.statistics)").each(function(i, tr){
         if ($(tr).css('display') == 'table-row'){
@@ -83,7 +83,7 @@ export function searchWithoutEvent(orders, users){
 export function searchWithEvent(orders, users) {
     $("#search").on('input', function(){
 //        console.log(this.value);   
-//        console.log(this.value);   
+//        console.log("search");   
         searchInTable(this.value, orders, users);
         checkForNothingFound();
         

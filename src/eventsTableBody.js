@@ -1,4 +1,4 @@
-const $ = require("jquery");
+import $ from "jquery";
 
 export default function eventsSetter(orders, users, companies) {
     $(".user_data > a").click(function(event) {

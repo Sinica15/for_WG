@@ -1,7 +1,26 @@
+function addStatsCells(){
+    let out = "";
+    out += "<tr class='statistics'>";
+    out += "<td>Orders Count</td>";
+    out += "<td colspan='2'>Average Check</td>";
+    out += "<td>Orders Total</td>";
+    out += "<td>Median Value</td>";
+    out += "<td>Average Check (Female)</td>";
+    out += "<td>Average Check (Male)</td></tr>";
+    out += "<tr class='statistics'>";
+    out += "<td id='orders-count'></td>";
+    out += "<td id='average-check' colspan='2'></td>";
+    out += "<td id='orders-total'></td>";
+    out += "<td id='median-value'></td>";
+    out += "<td id='average-check-female'></td>";
+    out += "<td id='average-check-male'></td>";
+    out += "</tr>";
+    return out;
+}
 
 export default function tableHeaderRender() {
-    var app = document.getElementById("app");    
-    var headerTable = "";
+    let app = document.getElementById("app");    
+    let headerTable = "";
     headerTable += "<table id='mainTable'><thead><tr>";
     headerTable += "<th colspan='2'>Search:</th>";
     headerTable += "<th colspan='6'><input type='text' id='search'></th>";
@@ -15,6 +34,14 @@ export default function tableHeaderRender() {
     headerTable += "<th class = 'sortable'>Card Type</th>";
     headerTable += "<th class = 'sortable'>Location</th>";
     headerTable += "</tr></thead><tbody id='table-body'>";
-    headerTable +="</tbody></table>";
+    headerTable +="</tbody>";
+    
+    
+    headerTable += "<tbody id='stat'>";
+    headerTable += addStatsCells();
+    headerTable += "</tbody>";
+    
+    headerTable += "</table>";
+    
     app.innerHTML = headerTable;
 }

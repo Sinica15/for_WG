@@ -1,4 +1,4 @@
-const $ = require("jquery");
+import $ from "jquery";
 
 import tableBodyRender from "./tableBodyRender.js";
 import tableSort from "./tableSort.js";
@@ -22,8 +22,7 @@ export default function eventSetSort(tableBody, orders, users, companies) {
         tableSort(orders, column, reverse);
         tableBodyRender(tableBody, orders, users, companies);
         search.searchWithoutEvent(orders, users);
-        
-        
+                
         if (!reverse){
             $('<span id="arrow"> &#8595;</span>').appendTo(this);
         }else{

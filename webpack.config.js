@@ -23,7 +23,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    open: true,
+//    open: true,
     port: 9000,
     before: function(app, server) {
       app.use("/api", express.static(path.join(__dirname, "data")));

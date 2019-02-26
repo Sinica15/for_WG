@@ -1,4 +1,4 @@
-const moment = require('moment');
+import moment from 'moment';
 
 import eventsSetter from "./eventsTableBody.js";
 import stats from "./stats.js"
@@ -8,12 +8,12 @@ function getNecessaryDateFormat (date, format){
 }
 
 function getNecessaryCurrency(value ,course){
-    var currencySymbol = "$";
+    let currencySymbol = "$";
     return value*course + " " + currencySymbol;
 }
 
 function hideCardNumber(number){
-    var outPutCardNumber = "";
+    let outPutCardNumber = "";
     for (let i = 0; i < number.length - 4; i++){
         if (i>1){
             outPutCardNumber+= "*";
@@ -28,11 +28,11 @@ function hideCardNumber(number){
 }
 
 function getUserName(userObject){
-    var sex = 'Ms.';
+    let sex = 'Ms.';
     if(userObject['gender'] == 'Male'){
         sex = 'Mr.';
     }
-    var userName = sex + " " + userObject['first_name'] + " " + userObject['last_name'];
+    let userName = sex + " " + userObject['first_name'] + " " + userObject['last_name'];
     return '<a href="#">' + userName + '</a>';
 }
 
@@ -45,7 +45,7 @@ function getCompanieInfo(id, companies){
 }
 
 function getUserDetails(userObject, companies){
-    var userDetails = "";
+    let userDetails = "";
     if(userObject['birthday'] != null){
         userDetails+= '<p>Birthday: ' + getNecessaryDateFormat(userObject['birthday'], 'MM/DD/YYYY') + '</p>';
     }
@@ -53,7 +53,7 @@ function getUserDetails(userObject, companies){
         userDetails+= '<p><img src="' + userObject['avatar'] + '" width="100px"></p>'
     }
     if (userObject['company_id'] != null){
-        var companieObject = getCompanieInfo(userObject['company_id'], companies);
+        let companieObject = getCompanieInfo(userObject['company_id'], companies);
         if ((companieObject['url'] != null)&&(companieObject['title'] != null)){
             userDetails+='<p>Company: <a href="' + companieObject['url'] + '" target="_blank">' + companieObject['title'] + '</a></p>';
         }else{
@@ -80,8 +80,8 @@ function getUserDetails(userObject, companies){
 }
 
 function getUserData(order, users, companies, sortTempFlag){
-    var id = order['user_id'];
-    var userObject;
+    let id = order['user_id'];
+    let userObject;
     for (let i = 0; i < users.length; i++){
         if (id == users[i]['id']){
             userObject = users[i];
@@ -97,7 +97,7 @@ function getUserData(order, users, companies, sortTempFlag){
 }
 
 function addStatsCells(){
-    var out = "";
+    let out = "";
     out += "<tr class='statistics'>";
     out += "<td>Orders Count</td>";
     out += "<td colspan='2'>Average Check</td>";
@@ -113,15 +113,14 @@ function addStatsCells(){
     out += "<td id='average-check-female'></td>";
     out += "<td id='average-check-male'></td>";
     out += "</tr>";
-    return out;
-    
+    return out; 
 }
 
 export default function tableRender(nodeTo, orders, users, companies, sortTempFlag) {
     
-    var outPutTable="";
+    let outPutTable="";
     
-    var testFlag = false;
+    const testFlag = false;
         
     for(let i = 0; i <orders.length; i++){
         if (testFlag && i == 6){
@@ -140,10 +139,10 @@ export default function tableRender(nodeTo, orders, users, companies, sortTempFl
     }
     
     
-    outPutTable += addStatsCells();
+//    outPutTable += addStatsCells();
+    
     nodeTo.innerHTML = outPutTable;
     
-    stats();
     
     eventsSetter(orders, users, companies);
     

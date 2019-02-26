@@ -1,4 +1,4 @@
-const $ = require("jquery");
+import $ from "jquery";
 
 function getUserSex(userName){
     let sex = "";
@@ -47,7 +47,7 @@ function mediumValue(obj, key){
     }
 //    console.log((obj.length % 2) == 0 );
     if ((obj.length % 2) == 0 ){
-        return (obj[obj.length / 2 - 1][key] + obj[obj.length / 2][key]) / 2.0
+        return ((obj[obj.length / 2 - 1][key] + obj[obj.length / 2][key]) / 2.0).toFixed(2);
     }
 }
 
@@ -74,13 +74,13 @@ function outPutStat(dataObj){
 
 function statsOutput(){
     let usersDataForStat = [];
-        $("#table-body tr:not(.statistics, #nothing-found)").each(function(i, tr){
-            if ($(tr).css('display') == 'none') return;
-            usersDataForStat.push({
-                sex: getUserSex($(tr).children("td").children("a").text()),
-                total : parseFloat($(tr).children(".total").text())   
-            }); 
-        });
+    $("#table-body tr:not(.statistics, #nothing-found)").each(function(i, tr){
+        if ($(tr).css('display') == 'none') return;
+        usersDataForStat.push({
+            sex: getUserSex($(tr).children("td").children("a").text()),
+            total : parseFloat($(tr).children(".total").text())   
+        }); 
+    });
     usersDataForStat.sort(function (a, b) {
         return a.total - b.total;
     });
@@ -89,9 +89,10 @@ function statsOutput(){
 }
 
 export default function stats() {
-    statsOutput()
+//    console.log("stats");
+    statsOutput();
     $("#search").on('input', function(){
-        statsOutput()
+        statsOutput();
     });
 }
                     

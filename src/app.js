@@ -1,8 +1,8 @@
-const $ = require("jquery");
+import $ from "jquery";
 
-var orders = require('../data/orders.json');
-var users = require('../data/users.json');
-var companies = require('../data/companies.json');
+import orders from '../data/orders.json';
+import users from '../data/users.json';
+import companies from '../data/companies.json';
 
 import './styles.css';
 
@@ -12,14 +12,15 @@ import tableHeaderRender from "./tableHeaderRender.js";
 import eventSetSort from "./eventsSort.js";
 import * as search from "./search";
 import stats from "./stats.js";
+import currencyСonverter from "./currencyСonverter.js";
 
 
 export default (function () {
     
     tableHeaderRender();
     
-    var tableBody = document.getElementById('table-body');
-    var sortTempFlag = true;
+    const tableBody = document.getElementById('table-body');
+    let sortTempFlag = true;
     tableBodyRender(tableBody, orders, users, companies, sortTempFlag);
     
     eventSetSort(tableBody, orders, users, companies);
@@ -28,9 +29,6 @@ export default (function () {
     
     stats();
     
-//    tableSort(orders, 'User Info', true);
-//    tableRender(app, orders, users, companies);
-    
-   
+    currencyСonverter();
     
 }());

@@ -1,34 +1,28 @@
 
 function sortTransactionID(orders, minus){
-//    console.log("transactIn");
-//    orders.sort(function (a, b) {
-//        return minus * (a.transaction_id - b.transaction_id);
-//    });
     orders.sort(function(a, b) {
-        var nameA = a.transaction_id.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.transaction_id.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.transaction_id.toUpperCase();
+        let nameB = b.transaction_id.toUpperCase();
         if (nameA < nameB) {
             return -1 * minus;
         }
         if (nameA > nameB) {
             return 1 * minus;
         }
-        // names must be equal
         return 0;
     });
 }
 
 function sortUserInfo(orders, minus){
     orders.sort(function(a, b) {
-        var nameA = a.name_for_sort.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name_for_sort.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.name_for_sort.toUpperCase();
+        let nameB = b.name_for_sort.toUpperCase();
         if (nameA < nameB) {
             return -1 * minus;
         }
         if (nameA > nameB) {
             return 1 * minus;
         }
-        // names must be equal
         return 0;
     });
 }
@@ -47,42 +41,34 @@ function sortOrderAmount(orders, minus){
 
 function sortCardType(orders, minus){
     orders.sort(function(a, b) {
-        var nameA = a.card_type.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.card_type.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.card_type.toUpperCase();
+        let nameB = b.card_type.toUpperCase();
         if (nameA < nameB) {
             return -1 * minus;
         }
         if (nameA > nameB) {
             return 1 * minus;
         }
-        // names must be equal
         return 0;
     });
 }
 
 function sortLocation(orders, minus){
-//    orders.sort(function (a, b) {
-//        return minus * (a.location_for_sort - b.location_for_sort);
-//    });
     orders.sort(function(a, b) {
-//        console.log(a.location_for_sort);
-        var nameA = a.location_for_sort.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.location_for_sort.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.location_for_sort.toUpperCase();
+        let nameB = b.location_for_sort.toUpperCase();
         if (nameA < nameB) {
             return -1 * minus;
         }
         if (nameA > nameB) {
             return 1 * minus;
         }
-        // names must be equal
         return 0;
     });
 }
 
 export default function tableSort(orders, key, sortFlag) {
-//    console.log("connected");
-    
-    var reversSort = 1;
+    let reversSort = 1;
     if(sortFlag){
         reversSort = -1;
     }
@@ -109,5 +95,4 @@ export default function tableSort(orders, key, sortFlag) {
         default:
             alert( 'miss' );
     }      
-
 }

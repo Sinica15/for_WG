@@ -1,5 +1,7 @@
 import $ from "jquery";
 
+import {converter} from "./currency.js";
+
 function getUserSex(userName){
     let sex = "";
     sex += userName[0];
@@ -64,11 +66,11 @@ function outPutStat(dataObj){
 //    console.log(dataObj);
     
     $('#orders-count').text(dataObj.length);
-    $('#orders-total').text(sumOnKey(dataObj, 'total'));
-    $('#median-value').text(mediumValue(dataObj, 'total'));
-    $('#average-check').text(averageMalFem(dataObj));
-    $('#average-check-female').text(averageMalFem(dataObj, 'female'));
-    $('#average-check-male').text(averageMalFem(dataObj, 'male'));
+    $('#orders-total').text(converter(sumOnKey(dataObj, 'total'), true));
+    $('#median-value').text(converter(mediumValue(dataObj, 'total'), true));
+    $('#average-check').text(converter(averageMalFem(dataObj), true));
+    $('#average-check-female').text(converter(averageMalFem(dataObj, 'female'), true));
+    $('#average-check-male').text(converter(averageMalFem(dataObj, 'male'), true));
     
 }
 
@@ -92,6 +94,10 @@ export default function stats() {
 //    console.log("stats");
     statsOutput();
     $("#search").on('input', function(){
+        statsOutput();
+    });
+    $('.currency-button').click(function(){
+//        console.log(123);
         statsOutput();
     });
 }

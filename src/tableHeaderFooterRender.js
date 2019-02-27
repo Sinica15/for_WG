@@ -18,7 +18,7 @@ function addStatsCells(){
     return out;
 }
 
-export default function tableHeaderRender() {
+export default function tableHeaderFooterRender() {
     let app = document.getElementById("app");    
     let headerTable = "";
     headerTable += "<table id='mainTable'><thead><tr>";

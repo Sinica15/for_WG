@@ -86,6 +86,9 @@ export function searchWithEvent(orders, users) {
 //        console.log("search");   
         searchInTable(this.value, orders, users);
         checkForNothingFound();
-        
     });
+//    $('.currency-button').click(function(){
+//        searchInTable(this.value, orders, users);
+//        checkForNothingFound();
+//    });
 }

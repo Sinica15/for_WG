@@ -2,14 +2,10 @@ import moment from 'moment';
 
 import eventsSetter from "./eventsTableBody.js";
 import stats from "./stats.js"
+import {converter} from "./currency.js";
 
 function getNecessaryDateFormat (date, format){
     return moment(date*1000).format(format);
-}
-
-function getNecessaryCurrency(value ,course){
-    let currencySymbol = "$";
-    return value*course + " " + currencySymbol;
 }
 
 function hideCardNumber(number){
@@ -93,6 +89,7 @@ function getUserData(order, users, companies, sortTempFlag){
 //            console.log(order['name_for_sort']);
         }
     }
+    
     return getUserName(userObject) + getUserDetails(userObject, companies);
 }
 
@@ -131,19 +128,15 @@ export default function tableRender(nodeTo, orders, users, companies, sortTempFl
         outPutTable+="<td>" + orders[i]['transaction_id'] + "</td>";
         outPutTable+="<td class='user_data'>" + getUserData(orders[i], users, companies, sortTempFlag) + "</td>";
         outPutTable+="<td>" + getNecessaryDateFormat(orders[i]['created_at'], 'MM/DD/YYYY, HH:MM:SS LT') + "</td>";
-        outPutTable+="<td class = 'total'>" + getNecessaryCurrency(orders[i]['total'], 1) + "</td>";
+        outPutTable+="<td class = 'total'>" + converter(orders[i]['total']) + "</td>";
         outPutTable+="<td>" + hideCardNumber(orders[i]['card_number']) + "</td>";
         outPutTable+="<td>" + orders[i]['card_type'] + "</td>";
         outPutTable+="<td>" + orders[i]['order_country'] + " " + "(" + orders[i]['order_ip'] + ")" + "</td>";
         outPutTable+="</tr>";
     }
-    
-    
-//    outPutTable += addStatsCells();
+//    console.log(orders);
     
     nodeTo.innerHTML = outPutTable;
     
-    
     eventsSetter(orders, users, companies);
-    
 }

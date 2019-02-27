@@ -8,27 +8,29 @@ import './styles.css';
 
 import tableBodyRender from "./tableBodyRender.js";
 import tableSort from "./tableSort.js";
-import tableHeaderRender from "./tableHeaderRender.js";
+import tableHeaderFooterRender from "./tableHeaderFooterRender.js";
 import eventSetSort from "./eventsSort.js";
 import * as search from "./search";
 import stats from "./stats.js";
-import currencyСonverter from "./currencyСonverter.js";
+import {getCurrencyCurses} from "./currency.js";
+import {changeCurrencyRender} from "./currency.js";
 
 
 export default (function () {
     
-    tableHeaderRender();
-    
+    tableHeaderFooterRender();
+        
     const tableBody = document.getElementById('table-body');
     let sortTempFlag = true;
     tableBodyRender(tableBody, orders, users, companies, sortTempFlag);
     
     eventSetSort(tableBody, orders, users, companies);
     
-    search.searchWithEvent(orders, users);
+    changeCurrencyRender(tableBody, orders, users, companies);
     
     stats();
     
-    currencyСonverter();
+    search.searchWithEvent(orders, users);
+    
     
 }());

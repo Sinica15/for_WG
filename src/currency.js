@@ -30,6 +30,9 @@ export { curses };
 
 function changeCurrencyEventSetter(tableBody, orders, users, companies){
     $('.currency-button').click(function(){
+        console.log('call currency');
+        $('.pressed').removeClass('pressed');
+        $(this).addClass('pressed');
         currentCurrency = $(this).children().text();
         tableBodyRender(tableBody, orders, users, companies);
         searchWithoutEvent(orders, users);
@@ -38,9 +41,12 @@ function changeCurrencyEventSetter(tableBody, orders, users, companies){
         if($('#change-currency').css('right') == '0px'){
             $('#change-currency').css('right', '-250px');
             $('#transparent-wind').css('display', 'none');
+            $('#currency-bar').css('height', '26px');
+            $('#change-currency').css('opacity', '1');
         }else{
             $('#change-currency').css('right', '0px');
             $('#transparent-wind').css('display', 'block');
+            $('#currency-bar').css('height', '50px');
         }
     });
     $('#transparent-wind').click(function(){
@@ -57,8 +63,11 @@ export function changeCurrencyRender(tableBody, orders, users, companies){
     
     let block = '<div id="change-currency" class="change-currency-open">';
     
+    
+    block += '<div id="currency-bar">';
     block += '<div id="clouse-open" title="clouse/open"></div>';
     block += '<div id="transparent-wind" title="make transparent"></div>';
+    block += '</div>';
         
     block += '<div class="buttons">';
     for (let currency in curses['rates']){

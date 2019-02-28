@@ -75,6 +75,7 @@ function outPutStat(dataObj){
 }
 
 function statsOutput(){
+    console.log("call stats");
     let usersDataForStat = [];
     $("#table-body tr:not(.statistics, #nothing-found)").each(function(i, tr){
         if ($(tr).css('display') == 'none') return;
@@ -86,8 +87,8 @@ function statsOutput(){
     usersDataForStat.sort(function (a, b) {
         return a.total - b.total;
     });
-//    console.log(usersDataForStat);
-    outPutStat(usersDataForStat);
+    console.log(usersDataForStat);
+    outPutStat(usersDataForStat);   
 }
 
 export default function stats() {

@@ -20,40 +20,87 @@
     background-color: rgba(246, 246, 246, 1);
 }
 
-#clouse-open{
-    content: "";
-    cursor: pointer;
-    
+.user_data{
+    max-width: 168px;
+}
+
+#currency-bar{
+    position: absolute;
+    top: 0;
+    left: -25px;
+    background-color: #eaeaea;
+    width: 26px;
+    height: 50px;
+    border-radius: 5px 0 0 5px;
+}
+
+#clouse-open, #transparent-wind{
+    border-radius: 20px;
+    cursor: pointer;    
     width: 20px;
     height: 20px;
-    background-color: firebrick;
     position: absolute;
-    top: 0px;
-    left: -20px;
+    left: 2px;
+}
+
+#clouse-open{
+    top: 3px;
+    background-color: #ff6a6a;
+}
+
+
+
+#clouse-open:before, #clouse-open:after{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 1px;
+    height: 15px;
+    transition: 0.4s;
+/*    background-color: blue; */
+}
+
+#clouse-open:hover:before, #clouse-open:hover:after{
+    content: "";
+    position: absolute;
+    top: 3px;
+    height: 15px;
+    background-color: #636363; 
+}
+
+#clouse-open:before{
+    transform: rotate(90deg);
+}
+
+#clouse-open:after{
+    transform: rotate(-90deg);
+}
+
+#clouse-open:hover:before{
+    transform: rotate(45deg);
+}
+
+#clouse-open:hover:after{
+    transform: rotate(-45deg);
 }
 
 #transparent-wind{
-    content: "";
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    background-color: cyan;
-    position: absolute;
-    top: 20px;
-    left: -20px;
+    top: 27px;
+    background-color: #87a1ff;
 }
 
 #change-currency{
     z-index: 10;
-/*    opacity: 0.3;*/
     width: 230px;
     height: 500px;
     padding: 10px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 0 0 0 5px;
     position: fixed;
-    top: 400px;
+    top: 10%;
     right: 0px;
-    background-color: aquamarine;
+    background-color: #eaeaea;
+    transition: 1s;
 }
 
 .buttons{
@@ -69,6 +116,7 @@
     -o-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
+    transition: 0.8s;
 }
 
 .currency-button{
@@ -92,10 +140,20 @@
     vertical-align: middle;
 }
 
+.pressed{
+    background-color: #a5a5a5;
+    transition: 0.8s;    
+}
+
 .currency-button div{
     align-self: center;
     text-align: center;
     display: block;
     margin: 5px 0;
     
+}
+
+#stat .statistics:first-of-type td{
+/*    color: red;*/
+    font-weight: bold;
 }

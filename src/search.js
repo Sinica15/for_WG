@@ -74,6 +74,7 @@ function checkForNothingFound(){
 }
 
 export function searchWithoutEvent(orders, users){
+        console.log("call searchWithout");   
     let searchVal = $("#search").val();
     console.log(searchVal);
     searchInTable(searchVal, orders, users);
@@ -83,7 +84,7 @@ export function searchWithoutEvent(orders, users){
 export function searchWithEvent(orders, users) {
     $("#search").on('input', function(){
 //        console.log(this.value);   
-//        console.log("search");   
+        console.log("call searchWith");   
         searchInTable(this.value, orders, users);
         checkForNothingFound();
     });

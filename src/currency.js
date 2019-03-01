@@ -30,7 +30,7 @@ export { curses };
 
 function changeCurrencyEventSetter(tableBody, orders, users, companies){
     $('.currency-button').click(function(){
-        console.log('call currency');
+//        console.log('call currency');
         $('.pressed').removeClass('pressed');
         $(this).addClass('pressed');
         currentCurrency = $(this).children().text();

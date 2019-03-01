@@ -45,7 +45,7 @@ function averageMalFem(obj, sexKey){
 function mediumValue(obj, key){
     if (obj.length == 1 ) return obj[0][key];
     if ((obj.length % 2) == 1 ){
-        return obj[(parseInt((obj.length / 2.0 ) + 0.5) - 1)][key];
+        return obj[(parseInt((obj.length / 2.0 ) + 0.5, 10) - 1)][key];
     }
 //    console.log((obj.length % 2) == 0 );
     if ((obj.length % 2) == 0 ){
@@ -75,7 +75,6 @@ function outPutStat(dataObj){
 }
 
 function statsOutput(){
-    console.log("call stats");
     let usersDataForStat = [];
     $("#table-body tr:not(.statistics, #nothing-found)").each(function(i, tr){
         if ($(tr).css('display') == 'none') return;
@@ -87,7 +86,8 @@ function statsOutput(){
     usersDataForStat.sort(function (a, b) {
         return a.total - b.total;
     });
-    console.log(usersDataForStat);
+//    console.log("call stats");
+//    console.log(usersDataForStat);
     outPutStat(usersDataForStat);   
 }
 

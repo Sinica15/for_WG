@@ -28,9 +28,8 @@ export default (function () {
     
     changeCurrencyRender(tableBody, orders, users, companies);
     
-    stats();
-    
     search.searchWithEvent(orders, users);
     
+    stats();
     
 }());
